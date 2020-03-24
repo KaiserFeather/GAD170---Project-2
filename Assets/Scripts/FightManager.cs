@@ -42,13 +42,32 @@ public class FightManager : MonoBehaviour
 
         yield return new WaitForSeconds(fightAnimTime);
 
-        float outcome = 0;
-        //defaulting to draw 
-        Character winner = lhs, defeated = rhs;
-        Debug.LogWarning("Attack called, needs to use character stats to determine winner with win strength from 1 to -1. This can most likely be ported from previous brief work.");
+        float outcome = Random.Range(-1.0f, 1.0f);
 
+        float lhsformula = outcome * lhs.rhythm + lhs.luck / lhs.style;
+        lhsformula = Mathf.Clamp(lhsformula, -1.0f, 1.0f);
 
-        Debug.LogWarning("Attack called, may want to use the BattleLog to report the dancers and the outcome of their dance off.");
+        float rhsformula = outcome * rhs.rhythm + rhs.luck / rhs.style;
+        rhsformula = Mathf.Clamp(rhsformula, -1.0f, 1.0f);
+
+        Character winner, defeated;
+        if (lhsformula > rhsformula)
+        {
+            outcome = lhsformula;
+            winner = lhs;
+            defeated = rhs;
+        }
+        else
+        {
+            outcome = rhsformula;
+            winner = rhs;
+            defeated = lhs;
+        }
+
+        BattleLog.Log(new DefaultLogMessage("The winner is" + winner.charName.GetFullCharacterName(), winner.myTeam.teamColor));
+        BattleLog.Log(new DefaultLogMessage("The loser is" + defeated.charName.GetFullCharacterName(), defeated.myTeam.teamColor));
+        //Debug.LogWarning("Attack called, needs to use character stats to determine winner with win strength from 1 to -1. This can most likely be ported from previous brief work.");
+        //Debug.LogWarning("Attack called, may want to use the BattleLog to report the dancers and the outcome of their dance off.");
 
         var results = new FightResultData(winner, defeated, outcome);
 
