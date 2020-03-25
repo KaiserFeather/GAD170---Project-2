@@ -42,10 +42,10 @@ public class FightManager : MonoBehaviour
 
         yield return new WaitForSeconds(fightAnimTime);
 
-        float outcome = Random.Range(-1.0f, 1.0f);
+        float outcome = Random.Range(-1.0f, 1.0f); //creates a random number to determine winners
 
-        float lhsformula = outcome * lhs.rhythm + lhs.luck / lhs.style;
-        lhsformula = Mathf.Clamp(lhsformula, -1.0f, 1.0f);
+        float lhsformula = outcome * lhs.rhythm + lhs.luck / lhs.style; //formula for determining win chances
+        lhsformula = Mathf.Clamp(lhsformula, -1.0f, 1.0f); //clamps the number in case of excesses
 
         float rhsformula = outcome * rhs.rhythm + rhs.luck / rhs.style;
         rhsformula = Mathf.Clamp(rhsformula, -1.0f, 1.0f);
@@ -63,13 +63,16 @@ public class FightManager : MonoBehaviour
             winner = rhs;
             defeated = lhs;
         }
+        //discovers who is the winner and loser
 
         BattleLog.Log(new DefaultLogMessage("The winner is" + winner.charName.GetFullCharacterName(), winner.myTeam.teamColor));
         BattleLog.Log(new DefaultLogMessage("The loser is" + defeated.charName.GetFullCharacterName(), defeated.myTeam.teamColor));
+        //sends the data to the battlelog so it can be displayed in text to the player
         //Debug.LogWarning("Attack called, needs to use character stats to determine winner with win strength from 1 to -1. This can most likely be ported from previous brief work.");
         //Debug.LogWarning("Attack called, may want to use the BattleLog to report the dancers and the outcome of their dance off.");
 
         var results = new FightResultData(winner, defeated, outcome);
+        //sends the results of the fight to be stored
 
         lhs.isSelected = false;
         rhs.isSelected = false;

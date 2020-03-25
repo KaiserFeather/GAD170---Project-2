@@ -45,10 +45,10 @@ public class Character : MonoBehaviour
 
         xp = 0;
 
-        rhythm = Random.Range(1, availablePoints - 1);
+        rhythm = Random.Range(1, availablePoints - 1); //creates the stats for each character
         availablePoints -= rhythm;
 
-        style = Random.Range(1, availablePoints - 1);
+        style = Random.Range(1, availablePoints - 1); //the -1 ensures that a skill cannot have all of the available points
         availablePoints -= style;
 
         luck = availablePoints;

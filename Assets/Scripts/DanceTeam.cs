@@ -28,7 +28,8 @@ public class DanceTeam : MonoBehaviour
     {
         allDancers.Add(dancer);
         activeDancers.Add(dancer);
-        dancer.myTeam = this;
+        dancer.myTeam = this; //checks which dancer is on which team
+        //adds all of the dancers to their teams
         //Debug.LogWarning("AddNewDancer called, it needs to put dancer in both lists and set the dancers team.");
     }
 
@@ -36,6 +37,7 @@ public class DanceTeam : MonoBehaviour
     {
         activeDancers.Remove(dancer);
         dancer.mojoRemaining = 0;
+        //used at the end of a battle to remove a dancer from the active dancers list so they can no longer participate
         //Debug.LogWarning("RemoveFromActive called, it needs to take the dancer out of the active list and possibly update selectedness, mojo etc.");
     }
 

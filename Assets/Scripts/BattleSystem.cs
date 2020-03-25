@@ -50,9 +50,9 @@ public class BattleSystem : MonoBehaviour
         }
         else if (TeamA.activeDancers.Count > 0 && TeamB.activeDancers.Count > 0)
         {
-            int i = Random.Range(0, TeamA.activeDancers.Count);
+            int i = Random.Range(0, TeamA.activeDancers.Count); 
             int j = Random.Range(0, TeamB.activeDancers.Count);
-
+            //picks a character from each team that is still active
             Character characterA = TeamA.activeDancers[i];
             Character characterB = TeamB.activeDancers[j];
          
@@ -64,7 +64,7 @@ public class BattleSystem : MonoBehaviour
         {
             DanceTeam winner;
 
-            winner = TeamA.activeDancers.Count <= 0 ? TeamB : TeamA;
+            winner = TeamA.activeDancers.Count <= 0 ? TeamB : TeamA; //checks to see which team wins the overall competition by looking at the number of active dancers
 
             GameEvents.BattleFinished(winner);
             winner.EnableWinEffects();
@@ -82,7 +82,7 @@ public class BattleSystem : MonoBehaviour
             data.defeated.myTeam.RemoveFromActive(data.defeated);
             data.winner.myTeam.EnableWinEffects();
         }
-
+        //when the fight ends, the loser is removed from the active list so they cannot perform again
         //Debug.LogWarning("FightOver called, may need to check for winners and/or notify teams of zero mojo dancers");
 
         //defaulting to starting a new round to ease development
